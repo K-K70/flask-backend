@@ -23,6 +23,8 @@ RUN apt-get clean && \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 RUN pip install --upgrade pip && \
-    pip install -r requirements.txt
+    pip install -r requirements.txt \
+    pip install gunicorn
 
-CMD ["python", "server.py"]
+# CMD ["python", "server.py"]
+CMD ["gunicorn", "-w", "1", "-b", "0.0.0.0:5000", "server:app"]
