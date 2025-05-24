@@ -94,7 +94,8 @@ def send_result_image(image_bgr):
 
 # 🔽 この2行を忘れずに！
 
-
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
 
 
 
