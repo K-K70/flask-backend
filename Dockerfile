@@ -1,5 +1,6 @@
 # FROM python:3.7.17
-FROM pytorch/pytorch:2.3.1-cuda12.1-cudnn8-devel
+# FROM pytorch/pytorch:2.3.1-cuda12.1-cudnn8-devel
+FROM pytorch/pytorch:2.3.1-cuda12.1-cudnn8-runtime
 RUN mkdir /backend
 WORKDIR /backend
 COPY ./requirements.txt /backend/requirements.txt
