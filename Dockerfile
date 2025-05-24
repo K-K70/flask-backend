@@ -4,6 +4,7 @@ FROM pytorch/pytorch:2.3.1-cuda12.1-cudnn8-runtime
 RUN mkdir /backend
 WORKDIR /backend
 COPY ./requirements.txt /backend/requirements.txt
+COPY ./server.py /backend/server.py
 RUN apt-get clean && \
     apt-get -y update && \
     apt-get install -y --no-install-recommends \
