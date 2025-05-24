@@ -47,11 +47,19 @@ app = Flask(__name__)
 CORS(app)
 
 # model = YOLO("yolo11n.pt")
-model = YOLO("best.pt")
-print(model.info())
+# model = YOLO("best.pt")
+# print(model.info())
+
+# ✅ モデルはまだ読み込まない、遅延読み込みモード
+model = None
 
 @app.route('/predict', methods=['POST'])
 def predict_route():
+    global model
+    if model is None:
+        model = YOLO("best.pt")  # 初回リクエスト時だけ読み込む
+        print(model.info())
+    
     if 'image' not in request.files:
         return '画像が送信されていません', 400
 

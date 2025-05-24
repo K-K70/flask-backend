@@ -22,3 +22,5 @@ RUN apt-get clean && \
     && rm -rf /var/lib/apt/lists/*
 RUN pip install --upgrade pip && \
     pip install -r requirements.txt
+
+CMD ["python", "server.py"]
