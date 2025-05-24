@@ -46,6 +46,11 @@ import base64
 app = Flask(__name__)
 CORS(app)
 
+#server立ち上がったかチェック用、デプロイすると「/」に１番にアクセスする
+@app.route('/', methods=['GET'])
+def index():
+    return 'Flask server is up.'
+
 # model = YOLO("yolo11n.pt")
 # model = YOLO("best.pt")
 # print(model.info())
