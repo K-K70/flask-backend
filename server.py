@@ -22,12 +22,12 @@ CORS(app, origins=["https://react-client-x82h.onrender.com/"], supports_credenti
 def index():
     return 'Flask server is up.'
 
-# # YOLOモデルの読み込み
-# model = YOLO("best.pt")
-# print(model.info())
+# YOLOモデルの読み込み
+model = YOLO("best.pt")
+print(model.info())
 
 # ✅ モデルはまだ読み込まない、遅延読み込みモード
-model = None
+# model = None
 
 # 注文と最新の検出ラベルを保持するグローバル変数
 orders_storage = []
@@ -120,10 +120,11 @@ def ask_chatgpt_match(detected_labels, order_products):
 
 @app.route('/predict', methods=['POST'])
 def predict_route():
-    global latest_detected_labels, orders_storage, model
-    if model is None:
-        model = YOLO("best.pt")  # 初回リクエスト時だけ読み込む
-        print(model.info())
+    global latest_detected_labels, orders_storage
+    # global model
+    # if model is None:
+    #     model = YOLO("best.pt")  # 初回リクエスト時だけ読み込む
+    #     print(model.info())
 
     if 'image' not in request.files:
         return jsonify({'error': '画像が送信されていません'}), 400
@@ -163,7 +164,9 @@ def predict_route():
         'matchedCustomers': list(matched_customers),
         'label': ', '.join(matched_customers) if matched_customers else 'なし'
     })
-    
+# アプリ起動（NgrokでHTTPS URLが発行される）
+app.run()
+
     # 森屋くんごめんね
     # chatGPTでラベルマッチング
     # matched_orders = []
