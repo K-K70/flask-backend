@@ -5,6 +5,7 @@ RUN mkdir /backend
 WORKDIR /backend
 COPY ./requirements.txt /backend/requirements.txt
 COPY ./server.py /backend/server.py
+COPY ./best.pt /backend/best.pt
 RUN apt-get clean && \
     apt-get -y update && \
     apt-get install -y --no-install-recommends \
