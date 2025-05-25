@@ -24,7 +24,10 @@ RUN apt-get clean && \
     && rm -rf /var/lib/apt/lists/*
 RUN pip install --upgrade pip && \
     pip install -r requirements.txt && \
-    pip install gunicorn
+    pip install --upgrade openai 
+RUN update-ca-certificates
 
-# CMD ["python", "server.py"]
+ENV REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+
 CMD ["gunicorn", "-w", "1", "-b", "0.0.0.0:5000", "server:app"]
